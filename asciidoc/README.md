@@ -10,10 +10,11 @@ First, make sure you've got Ruby installed. Then clone the repo and run:
 gem install bundle && bundle install && bundle exec guard
 ```
 
-This will start a web server and convert any `.adoc` files into `.html`. Any subsequent changes
+This will convert any `.adoc` files into `.html`. Any subsequent changes
 made to the `.adoc` files will be automatically picked up.
+
+Navigate to (file:///{install-path}/templates/asciidoc/example.html) to see an example.
 
 ## Config
 
 Change the Guardfile to control the Asciidoctor generation.
-
