@@ -13,7 +13,7 @@ gem install bundle && bundle install && bundle exec guard
 This will convert any `.adoc` files into `.html`. Any subsequent changes
 made to the `.adoc` files will be automatically picked up.
 
-Navigate to (file:///{install-path}/templates/asciidoc/example.html) to see an example.
+Navigate to [file:///{install-path}/templates/asciidoc/example.html] to see an example.
 
 ## Config
 
