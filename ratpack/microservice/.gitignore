@@ -10,4 +10,4 @@ out
 .classpath
 *.log
 *.log.gz
-/api/src/main/resources/public/docs
+src/main/resources/public/docs

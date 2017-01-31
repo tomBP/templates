@@ -10,6 +10,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields
 import static org.springframework.restdocs.restassured.RestAssuredRestDocumentation.document
+
 /**
  * Documents and tests all behaviour not specific to a particular endpoint.
  */
