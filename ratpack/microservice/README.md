@@ -39,7 +39,7 @@ Aims to make writing a production microservice with Ratpack easier. It provides 
 ```bash
 $ git clone https://github.com/tomBP/templates.git
 $ cd templates/ratpack/microservice
-$ gradlew build run
+$ ./gradlew build run
 ```
 
 Endpoints:
