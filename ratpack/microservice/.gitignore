@@ -1,0 +1,13 @@
+build
+deploy
+.gradle
+.idea
+*.iml
+*.ipr
+*.iws
+out
+.project
+.classpath
+*.log
+*.log.gz
+/api/src/main/resources/public/docs

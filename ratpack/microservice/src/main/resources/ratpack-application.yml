@@ -1,0 +1,10 @@
+metrics:
+  jvmMetrics: true
+  jmx:
+    enabled: true
+  webSocket:
+    reporterInterval: PT30S
+    excludeFilter: .*(js|css|ico|woff|admin|login|pac4j).*
+  requestMetricGroups:
+    update: update.*
+    delete: delete.*

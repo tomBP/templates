@@ -1,0 +1,118 @@
+= Microservice Guide
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[introduction]
+= Introduction
+
+Basic template for writing microservices with Ratpack, Spring Boot and Groovy.
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+The microservice tries to adhere as closely as possible to standard HTTP and Rest conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource, overwrites all fields
+
+| `PATCH`
+| Used for partial updates to an existing resource
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview-http-status-codes]]
+== HTTP status codes
+
+The microservice also tries to adhere as closely as possible to standard HTTP and Rest conventions in its
+use of HTTP status codes. For example,
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+
+| `405 Method Not Allowed`
+| The type of request for this resource is not allowed. For example, some endpoints may be GET only.
+Trying a POST will return this message.
+|===
+
+For more status codes, see the https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html[w3 standard]
+
+[[overview-errors]]
+== Errors
+
+Whenever an error response (status code >= 400) is returned, the body will contain a Json object
+that describes the problem as demonstrated by the examples below. In a development or integration
+environment the message may contain more detailed information.
+
+=== Validation Error Example
+
+include::{snippets}/validation-errors/http-request.adoc[]
+
+include::{snippets}/validation-errors/http-response.adoc[]
+
+include::{snippets}/validation-errors/response-fields.adoc[]
+
+=== Validation Error Codes
+
+Each validation error is identified by an error code and accompanied by a details property which
+lists any constraint values. This makes it easier for a client to process the error
+without having to parse the message.
+
+|===
+|Code|Description
+
+|VE1| The field exceeds the maximum integer value
+|VE2| The field is less than the minimum integer value
+|VE3| The field cannot be null
+|VE4| The field doesn't match the required pattern
+|VE5| The string is either too short or too long
+|VE6| The field is not a valid email
+|VE7| The field is not a valid url
+|VE8| The field is not in the correct date format
+|VE9| The field must be unique
+
+|===
+
+===  Not Found Example
+
+Errors other than validation errors have the same structure but without sub errors.
+
+include::{snippets}/errors/http-request.adoc[]
+
+include::{snippets}/errors/http-response.adoc[]
+
+[[resources]]
+= Resources
+
+include::resources/example.adoc[]

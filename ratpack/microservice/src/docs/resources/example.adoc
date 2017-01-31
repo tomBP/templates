@@ -1,0 +1,91 @@
+[[resources-example]]
+== Example
+
+[[fields-example]]
+=== Fields
+
+The table below describes all the fields of the example resource:
+
+include::{snippets}/example-create/request-fields.adoc[]
+
+[[resources-example-get]]
+=== Get a single example
+
+Retrieve a particular example by its name. A `404 Not Found` error will be returned if
+the example could not be found.
+
+==== Path parameters
+
+include::{snippets}/example-get/path-parameters.adoc[]
+
+==== Example request
+
+include::{snippets}/example-get/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/example-get/http-response.adoc[]
+
+[[resources-example-list]]
+=== Listing examples
+
+List examples.
+
+==== Request parameters
+
+include::{snippets}/example-list/request-parameters.adoc[]
+
+==== Example request
+
+include::{snippets}/example-list/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/example-list/http-response.adoc[]
+
+[[resources-example-create]]
+=== Create a user
+
+Create a new example.
+
+==== Example request
+
+include::{snippets}/example-create/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/example-create/http-response.adoc[]
+
+[[resources-example-update]]
+=== Update an example
+
+Update an existing example.
+
+==== Path parameters
+
+include::{snippets}/example-update/path-parameters.adoc[]
+
+==== Example request
+
+include::{snippets}/example-update/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/example-update/http-response.adoc[]
+
+[[resources-example-delete]]
+=== Delete an example
+
+Delete an example.
+
+==== Path parameters
+
+include::{snippets}/example-delete/path-parameters.adoc[]
+
+==== Example request
+
+include::{snippets}/example-delete/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/example-delete/http-response.adoc[]
