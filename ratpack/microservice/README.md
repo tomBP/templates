@@ -44,7 +44,7 @@ $ gradlew build run
 
 Endpoints:
 
-* Documentation - `http://localhost:5050` 
+* Documentation - [http://localhost:5050] 
 * Service root - `http://localhost:5050/api` 
 * Metrics - `http://localhost:5050/admin/metrics` 
 * Health check - `http://localhost:5050/admin/health-check/exampleHealth` 
