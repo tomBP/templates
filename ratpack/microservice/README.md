@@ -1,6 +1,6 @@
 # Microservice template
 
-A simple template for creating microservices with Ratpack, Groovy and Spring Boot.
+A simple template for creating production microservices with Ratpack, Groovy and Spring Boot.
 
 ## Contents
 
