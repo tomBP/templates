@@ -47,23 +47,22 @@ class GenericEndpointFunctionalSpec extends BaseDocumentationSpec {
     FieldDescriptor[] fields(boolean validationFields) {
         List<FieldDescriptor> fields = [
                 fieldWithPath('status').description('The HTTP status code, e.g. `404`'),
-                fieldWithPath('subErrors').description('A more detailed breakdown of the ' +
-                        'error, currently only applies for validation (400) errors'),
-                fieldWithPath('message').description('A description of the cause of the ' +
-                        'error'),
-                fieldWithPath('timestamp').description('The time, in milliseconds, at ' +
-                        'which the error occurred')
+                fieldWithPath('subErrors').description('A more detailed breakdown of the error, ' +
+                        'currently only applies for validation (400) errors'),
+                fieldWithPath('message').description('A description of the cause of the error'),
+                fieldWithPath('timestamp').description('The time, in milliseconds, at which the ' +
+                        'error occurred')
         ]
         if (validationFields) {
             fields.addAll([
                     fieldWithPath('subErrors[].field').description('The field where the ' +
                             'validation error occurred'),
-                    fieldWithPath('subErrors[].message').description('A full description ' +
-                            'of the cause of the validation error'),
-                    fieldWithPath('subErrors[].code').description('A code representing ' +
-                            'the validation error'),
-                    fieldWithPath('subErrors[].details').description('Details of the ' +
-                            'constraints of the validation error'),
+                    fieldWithPath('subErrors[].message').description('A full description of ' +
+                            'the cause of the validation error'),
+                    fieldWithPath('subErrors[].code').description('A code representing the ' +
+                            'validation error'),
+                    fieldWithPath('subErrors[].details').description('Details of the constraints ' +
+                            'of the validation error'),
             ])
         }
         fields
