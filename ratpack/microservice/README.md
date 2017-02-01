@@ -30,8 +30,11 @@ $ ./gradlew build run
 ```
 
 **Documentation:** [http://localhost:5050/](http://localhost:5050/)
+
 **Service root:** [http://localhost:5050/api](http://localhost:5050/api)
+
 **Metrics:** [http://localhost:5050/admin/metrics](http://localhost:5050/admin/metrics) 
+
 **Health check:** [http://localhost:5050/admin/health-check/exampleHealth](http://localhost:5050/admin/health-check/exampleHealth)
 
 ### Native executable
