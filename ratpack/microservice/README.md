@@ -1,20 +1,7 @@
 # Microservice template
 
-A simple template for creating production microservices with Ratpack, Groovy and Spring Boot.
-
-## Contents
-
-1. [Introduction](#intro)
-2. [Quick Start](#quickstart)
-3. [Guide](#guide)
-    - [Config](#config)
-    - [Formatter/IntelliJ setup](#ide)
-4. [Appendix](#appendix)
-    - [Cheatsheet](#cheatsheet)
-    
-## <a name="intro"></a> Introduction
-
-Aims to make writing a production microservice with Ratpack easier. It provides the following:
+A simple template for creating production microservices with Ratpack, Groovy and Spring Boot. It 
+provides the following:
 
 * [Gradle](https://gradle.org/) build
 * Written in typed, statically compiled [Groovy](http://www.groovy-lang.org/)
@@ -42,12 +29,10 @@ $ cd templates/ratpack/microservice
 $ ./gradlew build run
 ```
 
-Endpoints:
-
-* Documentation - [http://localhost:5050/](http://localhost:5050/)
-* Service root - [http://localhost:5050/api](http://localhost:5050/api)
-* Metrics - [http://localhost:5050/admin/metrics](http://localhost:5050/admin/metrics) 
-* Health check - [http://localhost:5050/admin/health-check/exampleHealth](http://localhost:5050/admin/health-check/exampleHealth)
+**Documentation:** [http://localhost:5050/](http://localhost:5050/)
+**Service root:** [http://localhost:5050/api](http://localhost:5050/api)
+**Metrics:** [http://localhost:5050/admin/metrics](http://localhost:5050/admin/metrics) 
+**Health check:** [http://localhost:5050/admin/health-check/exampleHealth](http://localhost:5050/admin/health-check/exampleHealth)
 
 ### Native executable
 
