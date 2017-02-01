@@ -8,13 +8,20 @@ import org.junit.Rule
 import org.springframework.restdocs.JUnitRestDocumentation
 import org.springframework.restdocs.constraints.ConstraintDescriptions
 import org.springframework.restdocs.payload.FieldDescriptor
+import org.springframework.restdocs.restassured.RestDocumentationFilter
+import org.springframework.restdocs.snippet.Snippet
 import org.springframework.util.StringUtils
 import ratpack.test.MainClassApplicationUnderTest
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
 
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.removeHeaders
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
+import static org.springframework.restdocs.restassured.RestAssuredRestDocumentation.document
 import static org.springframework.restdocs.restassured.RestAssuredRestDocumentation.documentationConfiguration
 import static org.springframework.restdocs.snippet.Attributes.key
 
@@ -24,16 +31,15 @@ import static org.springframework.restdocs.snippet.Attributes.key
 @CompileStatic
 class BaseDocumentationSpec extends Specification {
 
-    protected static final String EXAMPLE_ROOT = 'api/examples'
-    protected static final String EXAMPLE_RESOURCE = "${EXAMPLE_ROOT}/{name}"
-    protected static final String JSON = 'application/json'
-    protected static final String HOST = 'io.tbp.microservice'
-    protected static final String[] REQUEST_HEADERS_TO_REMOVE =
+    private static final String[] REQUEST_HEADERS_TO_REMOVE =
             ['Host', 'Accept', 'Content-Type', 'Content-Length']
-    protected static final String[] RESPONSE_HEADERS_TO_REMOVE =
+    private static final String[] RESPONSE_HEADERS_TO_REMOVE =
             ['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers',
              'Access-Control-Allow-Methods', 'content-type', 'set-cookie', 'content-encoding',
              'transfer-encoding', 'connection', 'Content-Length']
+    protected static final String EXAMPLE_ROOT = 'api/examples'
+    protected static final String EXAMPLE_RESOURCE = "${EXAMPLE_ROOT}/{name}"
+    protected static final String JSON = 'application/json'
     protected RequestSpecification documentationSpec
 
     /**
@@ -58,6 +64,24 @@ class BaseDocumentationSpec extends Specification {
         this.documentationSpec = new RequestSpecBuilder()
                 .addFilter(documentationConfiguration(restDocumentation))
                 .build()
+    }
+
+    /**
+     * Convenience method to create a documentation filter with
+     * preprocessed requests and responses
+     */
+    RestDocumentationFilter createFilter(String name, Snippet... snippets) {
+        document(name,
+                preprocessRequest(
+                        prettyPrint(),
+                        removeHeaders(REQUEST_HEADERS_TO_REMOVE)
+                ),
+                preprocessResponse(
+                        prettyPrint(),
+                        removeHeaders(RESPONSE_HEADERS_TO_REMOVE)
+                ),
+                snippets
+        )
     }
 
     /**

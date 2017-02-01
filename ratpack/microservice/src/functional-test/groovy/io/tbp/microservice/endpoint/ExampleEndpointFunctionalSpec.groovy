@@ -8,11 +8,9 @@ import static com.jayway.restassured.RestAssured.given
 import static groovy.json.JsonOutput.toJson
 import static org.hamcrest.CoreMatchers.equalTo
 import static org.hamcrest.CoreMatchers.is
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields
 import static org.springframework.restdocs.request.RequestDocumentation.*
-import static org.springframework.restdocs.restassured.RestAssuredRestDocumentation.document
 
 /**
  * Document and test the <i>/api/examples</i> endpoint.
@@ -42,23 +40,13 @@ class ExampleEndpointFunctionalSpec extends BaseDocumentationSpec {
                 contentType(JSON).
                 accept(JSON).
                 port(aut.address.port).
-                filter(
-                        document('example-get',
-                                preprocessRequest(
-                                        prettyPrint(),
-                                        removeHeaders(REQUEST_HEADERS_TO_REMOVE)
-                                ),
-                                preprocessResponse(
-                                        prettyPrint(),
-                                        removeHeaders(RESPONSE_HEADERS_TO_REMOVE)
-                                ),
-                                pathParameters(
-                                        parameterWithName(NAME_PARAM).
-                                                description(NAME_DESC)
-                                ),
-                                responseFields(fields(''))
-                        )
-                ).
+                filter(createFilter('example-get',
+                        pathParameters(
+                                parameterWithName(NAME_PARAM).
+                                        description(NAME_DESC)
+                        ),
+                        responseFields(fields(''))
+                )).
                 when().get(EXAMPLE_RESOURCE, 'a@example.com').
                 then().assertThat().
                 statusCode(is(HttpStatus.OK.value())).
@@ -84,24 +72,14 @@ class ExampleEndpointFunctionalSpec extends BaseDocumentationSpec {
                 contentType(JSON).
                 accept(JSON).
                 port(aut.address.port).
-                filter(
-                        document('example-list',
-                                preprocessRequest(
-                                        prettyPrint(),
-                                        removeHeaders(REQUEST_HEADERS_TO_REMOVE)
-                                ),
-                                preprocessResponse(
-                                        prettyPrint(),
-                                        removeHeaders(RESPONSE_HEADERS_TO_REMOVE)
-                                ),
-                                requestParameters(
-                                        parameterWithName(LIMIT).description(LIMIT_DESC),
-                                        parameterWithName(PAGE).description(PAGE_DESC),
-                                        parameterWithName(PAGE_SIZE).description(PAGE_SIZE_DESC)
-                                ),
-                                responseFields(fields('[].'))
-                        )
-                ).
+                filter(createFilter('example-list',
+                        requestParameters(
+                                parameterWithName(LIMIT).description(LIMIT_DESC),
+                                parameterWithName(PAGE).description(PAGE_DESC),
+                                parameterWithName(PAGE_SIZE).description(PAGE_SIZE_DESC)
+                        ),
+                        responseFields(fields('[].'))
+                )).
                 queryParam(LIMIT, '10').
                 queryParam(PAGE, '1').
                 queryParam(PAGE_SIZE, '2').
@@ -133,19 +111,7 @@ class ExampleEndpointFunctionalSpec extends BaseDocumentationSpec {
                 body(toJson(newExample)).
                 accept(JSON).
                 port(aut.address.port).
-                filter(
-                        document('example-create',
-                                preprocessRequest(
-                                        prettyPrint(),
-                                        removeHeaders(REQUEST_HEADERS_TO_REMOVE)
-                                ),
-                                preprocessResponse(
-                                        prettyPrint(),
-                                        removeHeaders(RESPONSE_HEADERS_TO_REMOVE)
-                                ),
-                                requestFields(fields(''))
-                        )
-                ).
+                filter(createFilter('example-create', requestFields(fields('')))).
                 when().post(EXAMPLE_ROOT).
                 then().assertThat().
                 statusCode(is(HttpStatus.CREATED.value())).
@@ -166,23 +132,10 @@ class ExampleEndpointFunctionalSpec extends BaseDocumentationSpec {
                 body(toJson(changedExample)).
                 accept(JSON).
                 port(aut.address.port).
-                filter(
-                        document('example-update',
-                                preprocessRequest(
-                                        prettyPrint(),
-                                        removeHeaders(REQUEST_HEADERS_TO_REMOVE)
-                                ),
-                                preprocessResponse(
-                                        prettyPrint(),
-                                        removeHeaders(RESPONSE_HEADERS_TO_REMOVE)
-                                ),
-                                pathParameters(
-                                        parameterWithName(NAME_PARAM).
-                                                description(NAME_DESC)
-                                ),
-                                requestFields(fields(''))
-                        )
-                ).
+                filter(createFilter('example-update',
+                        pathParameters(parameterWithName(NAME_PARAM).description(NAME_DESC)),
+                        requestFields(fields(''))
+                )).
                 when().put(EXAMPLE_RESOURCE, 'a@example.com').
                 then().assertThat().statusCode(is(HttpStatus.NO_CONTENT.value()))
     }
@@ -205,20 +158,9 @@ class ExampleEndpointFunctionalSpec extends BaseDocumentationSpec {
                 contentType(JSON).
                 accept(JSON).
                 port(aut.address.port).
-                filter(
-                        document('example-delete',
-                                preprocessRequest(
-                                        prettyPrint(),
-                                        removeHeaders(REQUEST_HEADERS_TO_REMOVE)
-                                ),
-                                preprocessResponse(
-                                        prettyPrint(),
-                                        removeHeaders(RESPONSE_HEADERS_TO_REMOVE)
-                                ),
-                                pathParameters(parameterWithName(NAME_PARAM).
-                                        description(NAME_DESC))
-                        )
-                ).
+                filter(createFilter('example-delete',
+                        pathParameters(parameterWithName(NAME_PARAM).description(NAME_DESC))
+                )).
                 when().delete(EXAMPLE_RESOURCE, 'a@example.com').
                 then().assertThat().
                 statusCode(is(HttpStatus.NO_CONTENT.value()))
